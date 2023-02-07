@@ -22,7 +22,7 @@ cloud {
     component "Cygnus" as cygnus
     component "Andromeda" as andromeda
     database "database" as database
-    component "phoenix" as phoenix
+    component "Phoenix" as phoenix
 
     user .right.> pegasus 
     pegasus .down.> queue : 1. produce fotos
