@@ -17,29 +17,28 @@ skinparam componentStyle uml2
 cloud {
     actor "User" as user
     component "Pegasus" as pegasus
+    storage "File Server" as storage
     queue "queue" as queue
     component "Draco" as draco
     component "Cygnus" as cygnus
     component "Andromeda" as andromeda
     database "database" as database
-    component "Phoenix" as phoenix
 
-    user .right.> pegasus 
-    pegasus .down.> queue : 1. produce fotos
-    
-    queue .left.> draco : 2. consume fotos
-    queue <.left. draco : 3. produce numbers
+    user .down.> pegasus
+    pegasus .down.> storage : 1. store fotos
+    pegasus .down.> queue : 2. produce fotos infos
 
-    queue .right.> cygnus : 4. consume numbers
-    
-    cygnus .down.> database : 5. store numbers
-  
-    andromeda .right.> database : 6. consume monthly numbers
-    andromeda .up.> pegasus : 7. produce and send report
-  
-    database .up.> phoenix : 8. poll monthly numbers
-    phoenix .up.> pegasus : 9. notify for fotos
-  
+    draco <.up. queue : 3. consume fotos infos
+    draco .up.> storage : 4. consume fotos
+    draco .up.> queue : 5. produce numbers
+
+    queue .up.> cygnus : 6. consume numbers
+    cygnus .down.> database : 7. store numbers
+    cygnus .up.> pegasus : 8. send reports
+
+    database .up.> andromeda : 9. poll monthly numbers
+    andromeda .right.> pegasus : 10. notify for fotos
+
 }
 
 @enduml
