@@ -23,21 +23,25 @@ cloud {
     component "Cygnus" as cygnus
     component "Andromeda" as andromeda
     database "database" as database
+    component "Phoenix" as phoenix
 
     user .down.> pegasus
-    pegasus .down.> storage : 1. store fotos
-    pegasus .down.> queue : 2. produce fotos infos
 
-    draco <.up. queue : 3. consume fotos infos
-    draco .up.> storage : 4. consume fotos
-    draco .up.> queue : 5. produce numbers
+    pegasus .down.> draco : 1. send fotos
 
-    queue .up.> cygnus : 6. consume numbers
-    cygnus .down.> database : 7. store numbers
-    cygnus .up.> pegasus : 8. send reports
+    draco .down.> storage : 2. store fotos
+    draco .down.> queue : 3. produce fotos infos
 
-    database .up.> andromeda : 9. poll monthly numbers
-    andromeda .right.> pegasus : 10. notify for fotos
+    cygnus <.up. queue : 4. consume fotos infos
+    cygnus .up.> storage : 5. consume fotos
+    cygnus .up.> queue : 6. produce numbers
+
+    andromeda .down.> queue : 7. consume numbers
+    andromeda .down.> database : 8. store numbers
+    andromeda .up.> pegasus : 9. send reports
+
+    database .up.> phoenix : 10. poll monthly numbers
+    phoenix .right.> pegasus : 11. notify for fotos
 
 }
 
