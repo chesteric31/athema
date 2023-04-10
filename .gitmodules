@@ -1,3 +1,6 @@
 [submodule "pegasus"]
 	path = pegasus
 	url = https://github.com/chesteric31/pegasus.git
+[submodule "draco"]
+	path = draco
+	url = https://github.com/chesteric31/draco.git
