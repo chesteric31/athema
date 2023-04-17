@@ -4,3 +4,6 @@
 [submodule "draco"]
 	path = draco
 	url = https://github.com/chesteric31/draco.git
+[submodule "cygnus"]
+	path = cygnus
+	url = https://github.com/chesteric31/cygnus.git
