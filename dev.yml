@@ -1,6 +1,15 @@
-version: "3.8"
+version: '3.1'
 services:
-  rabbitmq:
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: draco
+    volumes:
+      - ./mongo_data:/data/db
+    ports:
+      - 27017:27017
+  rabbit:
     image: rabbitmq:3.8.25-management-alpine
     container_name: "rabbitmq"
     ports:
@@ -11,7 +20,6 @@ services:
       - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
     networks:
       - rabbitmq_net
-
 networks:
   rabbitmq_net:
     driver: bridge
