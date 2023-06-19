@@ -1,0 +1,47 @@
+@startuml
+skinparam node {
+    FontColor          black
+    AttributeFontColor black
+    FontSize           17
+    AttributeFontSize  15
+    AttributeFontname  Droid Sans Mono
+    BackgroundColor    #6A9EFF
+    BorderColor        black
+    ArrowColor         #222266
+}
+title "Athena System"
+
+cloud "local network" {
+
+  cloud "NAS" {
+    node pegasus [
+    pegasus
+    ===
+    UI
+    ]
+
+    node cygnus [
+    cygnus
+    ===
+    IA
+    ]
+  }
+  cloud "MAC" {
+    node draco [
+    draco
+    ===
+    API
+    ]
+    node rabbit [
+    rabbit
+    ===
+    BROKER
+    ]
+  }
+  pegasus -> draco
+  draco -> rabbit
+  cygnus -> rabbit
+  cygnus -> draco
+}
+
+@enduml
